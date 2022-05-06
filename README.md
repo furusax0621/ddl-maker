@@ -381,3 +381,7 @@ func (pc PlayerComment) ForeignKeys() dialect.ForeignKeys {
 	}
 }
 ```
+
+### Specify a Symbol
+
+Using the `WithSymbolForeignKeyOption()`, you can specify a foreign key symbol.
