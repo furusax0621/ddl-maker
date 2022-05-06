@@ -287,17 +287,17 @@ ___
 |           int8            |      TINYINT      |
 |           int16           |     SMALLINT      |
 |           int32           |      INTGER       |
-|    int64, sql.NullInt64   |      BIGINT       |
+|   int64, sql.NullInt64    |      BIGINT       |
 |           uint8           | TINYINT unsigned  |
-|           uint16          | SMALLINT unsigned |
-|           uint32          | INTEGER unsigned  |
-|           uint64          |  BIGINT unsigned  |
+|          uint16           | SMALLINT unsigned |
+|          uint32           | INTEGER unsigned  |
+|          uint64           |  BIGINT unsigned  |
 |          float32          |       FLOAT       |
 | float64, sql.NullFloat64  |      DOUBLDE      |
 |  string, sql.NullString   |      VARCHAR      |
 |    bool, sql.NullBool     |    TINYINT(1)     |
 | time.Time, mysql.NullTime |     DATETIME      |
-|      json.RawMessage      |        JSON       |
+|      json.RawMessage      |       JSON        |
 
 [mysql.NullTime](https://godoc.org/github.com/go-sql-driver/mysql#NullTime) is from [github.com/go-sql-driver/mysql](https://github.com/go-sql-driver/mysql).
 
@@ -305,13 +305,13 @@ ___
 
 tag prefix is `ddl`
 
-|   TAG Value   |                  VALUE                   |
-| :-----------: | :--------------------------------------: |
-|     null      |        NULL  (DEFAULT `NOT NULL`)        |
-| size=`<size>` |         VARCHAR(`<size value>`)          |
-|     auto      |              AUTO INCREMENT              |
+|   TAG Value   |                       VALUE                        |
+| :-----------: | :------------------------------------------------: |
+|     null      |             NULL  (DEFAULT `NOT NULL`)             |
+| size=`<size>` |              VARCHAR(`<size value>`)               |
+|     auto      |                   AUTO INCREMENT                   |
 | type=`<type>` | OVERRIDE struct type. <br> ex) string \`ddl:"text` |
-|      -        |            Don't define column           |
+|       -       |                Don't define column                 |
 
 ## How to Set PrimaryKey
 
