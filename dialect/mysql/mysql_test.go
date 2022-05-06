@@ -188,6 +188,13 @@ func TestAddForeignKey(t *testing.T) {
 
 	foreignColumns = []string{"product_category", "product_id"}
 	referenceColumns = []string{"category", "id"}
+	fk = AddForeignKey(foreignColumns, referenceColumns, "product", WithUpdateForeignKeyOption(ForeignKeyOptionSetDefault), withDeleteForeignKeyOption(ForeignKeyOptionSetNull))
+	if fk.ToSQL() != "FOREIGN KEY (`product_category`, `product_id`) REFERENCES `product` (`category`, `id`) ON DELETE SET NULL ON UPDATE SET DEFAULT" {
+		t.Fatal("[error] parse foreign key", fk.ToSQL())
+	}
+
+	foreignColumns = []string{"product_category", "product_id"}
+	referenceColumns = []string{"category", "id"}
 	fk = AddForeignKey(foreignColumns, referenceColumns, "product", withSymbolForeignKeyOption("fk_product_category_id"))
 	if fk.ToSQL() != "CONSTRAINT `fk_product_category_id` FOREIGN KEY (`product_category`, `product_id`) REFERENCES `product` (`category`, `id`)" {
 		t.Fatal("[error] parse foreign key", fk.ToSQL())
