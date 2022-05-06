@@ -68,6 +68,7 @@ var ForeignKeyOptionSetDefault ForeignKeyOptionType = "SET DEFAULT"
 
 // ForeignKey XXX
 type ForeignKey struct {
+	symbol             string
 	foreignColumns     []string
 	referenceTableName string
 	referenceColumns   []string
@@ -110,6 +111,17 @@ func WithDeleteForeignKeyOption(option ForeignKeyOptionType) ForeignKeyOption {
 		return withDeleteForeignKeyOption("")
 	}
 	return withDeleteForeignKeyOption(option)
+}
+
+type withSymbolForeignKeyOption string
+
+func (o withSymbolForeignKeyOption) Apply(f *ForeignKey) {
+	f.symbol = string(o)
+}
+
+// WithSymbolForeignKeyOption XXX
+func WithSymbolForeignKeyOption(symbol string) ForeignKeyOption {
+	return withSymbolForeignKeyOption(symbol)
 }
 
 // HeaderTemplate XXX
@@ -375,6 +387,9 @@ func (fk ForeignKey) ToSQL() string {
 	}
 	if fk.updateOption != "" {
 		sql = sql + fmt.Sprintf(" ON UPDATE %s", fk.updateOption)
+	}
+	if fk.symbol != "" {
+		sql = fmt.Sprintf("CONSTRAINT %s ", quote(fk.symbol)) + sql
 	}
 	return sql
 

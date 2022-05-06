@@ -185,4 +185,11 @@ func TestAddForeignKey(t *testing.T) {
 	if fk.ToSQL() != "FOREIGN KEY (`product_category`, `product_id`) REFERENCES `product` (`category`, `id`) ON UPDATE CASCADE" {
 		t.Fatal("[error] parse foreign key", fk.ToSQL())
 	}
+
+	foreignColumns = []string{"product_category", "product_id"}
+	referenceColumns = []string{"category", "id"}
+	fk = AddForeignKey(foreignColumns, referenceColumns, "product", withSymbolForeignKeyOption("fk_product_category_id"))
+	if fk.ToSQL() != "CONSTRAINT `fk_product_category_id` FOREIGN KEY (`product_category`, `product_id`) REFERENCES `product` (`category`, `id`)" {
+		t.Fatal("[error] parse foreign key", fk.ToSQL())
+	}
 }
